@@ -572,7 +572,7 @@
   <div class="story-text">
     <div class="story-label">about sawa flower</div>
     <!-- ★ 브랜드 스토리 제목과 본문 -->
-    <div class="story-heading">평범한 애들이<br>가진 특별한 감정</div>
+    <div class="story-heading">아무도 모르게<br>흘러가던 시간들</div>
     <div class="story-body">
       화려하지 않아도 괜찮아.<br>
       유명하지 않아도 아름다울 수 있어.<br><br>
@@ -597,7 +597,10 @@
 <!-- ===== 판매 정책 배너 ===== -->
 <div class="policy-banner">
   <!-- ★ 정책 문구 바꾸려면 여기 수정 -->
-  <div class="policy-text">룩 단위로만 판매합니다 — 단품 개별 구매 불가 · 한정수량</div>
+  <div class="policy-text"><!-- ===== 판매 정책 배너 ===== -->
+<div class="policy-banner">
+  <!-- ★ 정책 문구 바꾸려면 여기 수정 -->
+  <div class="policy-text">룩 단위로만 판매합니다 — 단품 개별 구매 불가 · 한정수량</div></div>
 </div>
 
 <!-- ===== 문의 ===== -->
@@ -606,11 +609,10 @@
   <div class="contact-title">구매 문의</div>
   <!-- ★ 문의 안내 문구 -->
   <div class="contact-desc">
-    룩 단위로만 판매해요.<br>
-    인스타그램 DM으로 문의해주세요.
+    구매는 인스타그램 DM으로 문의해주세요.<br>
   </div>
   <!-- ★ 인스타그램 주소 바꾸려면 href="" 안을 수정하세요 -->
-  <a href="https://instagram.com/sawaflower" class="contact-link" target="_blank">
+  <a href="https://instagram.com/sawaflower_kr" class="contact-link" target="_blank">
     instagram @sawaflower →
   </a>
 </div>
@@ -623,8 +625,8 @@
   </div>
   <div class="footer-copy">
     <!-- ★ 저작권 문구 -->
-    © 2025 Sawa Flower<br>
-    룩 단위 판매 · 단품 없음
+    © 2026 Sawa Flower<br>
+    룩 단위로 팝니다 — 단품 없음
   </div>
 </footer>
 
@@ -632,7 +634,7 @@
 // ================================================================
 //  ★★★ 여기서 룩 정보를 수정하세요! ★★★
 //  name: 룩 이름
-//  ko: 한국어 부제목
+//  eng: 영어 부제목
 //  items: 포함된 아이템 (줄바꿈은 \n)
 //  price: 가격
 //  photo: 사진 파일명 (같은 폴더에 사진을 넣고 파일명 입력)
@@ -641,48 +643,48 @@
 const looks = [
   {
     num: '01',
-    name: 'Fog and Rice Field',
-    ko: '안개 낀 논밭',
+    name: '늪가의 소녀',
+    eng: 'The girl by the marsh',
     items: '레이스 슬립 원피스\n루즈 모헤어 니트\n망사 스타킹 + 벨벳 초커',
     price: '₩148,000',
     photo: ''  // 예: 'look01.jpg'
   },
   {
     num: '02',
-    name: 'Old Bus Stop',
-    ko: '낡은 버스정류장',
+    name: '낡은 버스정류장',
+    eng: 'Old Bus Stop',
     items: '빈티지 플로럴 블라우스\n와이드 린넨 슬랙스\n레이스 삭스 + 가죽 초커',
     price: '₩136,000',
     photo: ''
   },
   {
     num: '03',
-    name: 'Overgrown Path',
-    ko: '우거진 풀밭 끝',
+    name: '풀밭의 끝에서',
+    eng: 'Overgrown Path',
     items: '플로럴 미디 슬립스커트\n크롭 가디건\n패턴 스타킹 + 리본 초커',
     price: '₩124,000',
     photo: ''
   },
   {
     num: '04',
-    name: 'The Warehouse Door',
-    ko: '창고 문 앞',
+    name: '폐창고의 오후',
+    eng: 'Afternoon in a deserted warehouse',
     items: '오버사이즈 빈티지 셔츠\n레이스 슬립 (레이어드)\n시스루 타이즈 + 벨벳 초커',
     price: '₩158,000',
     photo: ''
   },
   {
     num: '05',
-    name: 'Window Light',
-    ko: '낡은 창가',
+    name: '낡은 창가',
+    eng: 'Window Light',
     items: '크레이프 롱원피스\n레이스 소매 이너\n오버니삭스 + 체인 초커',
     price: '₩142,000',
     photo: ''
   },
   {
     num: '06',
-    name: 'Coming Soon',
-    ko: '곧 공개',
+    name: '곧 공개',
+    eng: 'Coming Soon',
     items: '',
     price: '',
     photo: ''
@@ -693,14 +695,11 @@ const looks = [
 //  ★★★ 여기서 아이템 태그를 수정하세요! ★★★
 // ================================================================
 const items = [
+  '초커',
+  '독특한 스타킹',
+  '빈티지 믹스',
   '레이스 슬립 원피스',
   '루즈 니트',
-  '독특한 스타킹',
-  '초커',
-  '빈티지 믹스',
-  '레이스 삭스',
-  '오버사이즈 가디건',
-  '플로럴 블라우스',
 ];
 
 // ── 룩 카드 자동 생성 (건드리지 마세요) ──
