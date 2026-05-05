@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sawa Flower — 沢の花</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=IM+Fell+English:ital@0;1&family=Noto+Serif+KR:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  /* ================================================
+     사와 플라워 홈페이지
+     수정하고 싶은 부분은 아래 주석을 참고하세요!
+     ================================================ */
+
+  /* 색상 설정 — 여기서 전체 색상을 바꿀 수 있어요 */
+  :root {
+    --bg:      #EDE8DF;   /* 배경색 */
+    --bg-dark: #2A2520;   /* 어두운 배경 */
+    --bg-mid:  #3A2E26;   /* 중간 배경 */
+    --cream:   #F0EBE3;   /* 가장 밝은 색 */
+    --sand:    #E8E0D4;   /* 카드 배경 */
+    --stone:   #C4B8A8;   /* 중간 톤 */
+    --dust:    #A09080;   /* 흐린 텍스트 */
+    --rust:    #8A7A6E;   /* 보조 텍스트 */
+    --ink:     #2A2520;   /* 주 텍스트 */
+    --accent:  #6A5A48;   /* 포인트 */
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+  }
+
+  /* 필름 grain 효과 */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.3;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  }
+
+  /* ===== 네비게이션 ===== */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 48px;
+    border-bottom: 0.5px solid #b8a99240;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100;
+  }
+
+  .nav-logo {
+    font-family: 'IM Fell English', serif;
+    font-size: 14px;
+    letter-spacing: 0.25em;
+    color: var(--bg-mid);
+  }
+
+  .nav-sub {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--rust);
+    letter-spacing: 0.1em;
+    margin-top: 3px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.12em;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  /* ===== 히어로 섹션 ===== */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 90vh;
+  }
+
+  /* 왼쪽 이미지 영역 */
+  /* 여기에 실제 사진을 넣으려면: background-image: url('사진파일명.jpg'); 로 바꾸세요 */
+  .hero-image {
+    background: var(--stone);
+    position: relative;
+    overflow: hidden;
+    min-height: 500px;
+  }
+
+  .hero-image-placeholder {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    /* 실제 사진으로 바꾸려면 아래 background 줄을 추가하세요:
+       background: url('your-photo.jpg') center/cover no-repeat;
+       그리고 이 안의 텍스트는 지워도 돼요 */
+  }
+
+  .placeholder-text {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--bg);
+    opacity: 0.5;
+    letter-spacing: 0.2em;
+  }
+
+  /* 오른쪽 텍스트 영역 */
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 72px 60px;
+    background: var(--sand);
+  }
+
+  .hero-kana {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--rust);
+    margin-bottom: 20px;
+  }
+
+  /* ★ 메인 타이틀 — 여기서 바꾸세요 */
+  .hero-title {
+    font-family: 'IM Fell English', serif;
+    font-size: 54px;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .hero-title-ko {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    color: var(--rust);
+    margin-bottom: 40px;
+  }
+
+  /* ★ 메인 설명 문구 — 여기서 바꾸세요 */
+  .hero-desc {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 2.2;
+    color: var(--accent);
+    margin-bottom: 52px;
+    max-width: 320px;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rust);
+    padding-bottom: 4px;
+    width: fit-content;
+    transition: gap 0.3s;
+  }
+
+  .hero-cta:hover { gap: 20px; }
+
+  /* ===== 섹션 구분선 ===== */
+  .section-divider {
+    text-align: center;
+    padding: 52px 48px 28px;
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.35em;
+    color: var(--rust);
+  }
+
+  /* ===== 룩 그리드 ===== */
+  .looks-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .look-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    /* 각 카드 높이 */
+    aspect-ratio: 3/4;
+    background: var(--stone);
+  }
+
+  /* ★ 룩 카드 사진 — 각 카드에 사진 넣는 방법:
+     .look-card:nth-child(1) { background: url('look01.jpg') center/cover; }
+     .look-card:nth-child(2) { background: url('look02.jpg') center/cover; }
+     이런 식으로 추가하세요 */
+
+  .look-card-inner {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .look-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(30,24,18,0.8) 0%, transparent 55%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 28px;
+  }
+
+  .look-card:hover .look-overlay { opacity: 1; }
+
+  .look-tag {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: rgba(240,235,227,0.85);
+    font-family: 'Noto Serif KR', serif;
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    padding: 4px 10px;
+  }
+
+  /* ★ 룩 이름 — looks 배열에서 수정하세요 (아래 JS 부분) */
+  .look-name {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--cream);
+    margin-bottom: 5px;
+  }
+
+  .look-items {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: #c0b4a4;
+    margin-bottom: 6px;
+    line-height: 1.7;
+  }
+
+  .look-price {
+    font-family: 'IM Fell English', serif;
+    font-size: 14px;
+    color: var(--stone);
+  }
+
+  /* ===== 브랜드 스토리 ===== */
+  .brand-story {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 2px;
+  }
+
+  .story-image {
+    background: var(--bg-mid);
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    /* 사진 넣으려면:
+       background: url('story-photo.jpg') center/cover no-repeat; */
+  }
+
+  .story-text {
+    background: var(--sand);
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .story-label {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--rust);
+    margin-bottom: 24px;
+  }
+
+  /* ★ 브랜드 스토리 제목 */
+  .story-heading {
+    font-family: 'IM Fell English', serif;
+    font-size: 34px;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+
+  /* ★ 브랜드 스토리 본문 */
+  .story-body {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 2.3;
+    color: var(--accent);
+  }
+
+  /* ===== 아이템 태그 ===== */
+  .items-strip {
+    padding: 52px 48px;
+    background: var(--bg);
+  }
+
+  .items-label {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--rust);
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  .items-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  /* ★ 아이템 태그 — items 배열에서 수정하세요 (아래 JS 부분) */
+  .item-pill {
+    background: var(--sand);
+    border: 0.5px solid #b8a99260;
+    padding: 12px 24px;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    cursor: default;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .item-pill:hover {
+    background: var(--ink);
+    color: var(--cream);
+  }
+
+  /* ===== 판매 정책 배너 ===== */
+  .policy-banner {
+    background: var(--bg-mid);
+    padding: 32px 48px;
+    text-align: center;
+  }
+
+  .policy-text {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--cream);
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== 문의 섹션 ===== */
+  .contact-section {
+    padding: 80px 48px;
+    text-align: center;
+    background: var(--sand);
+  }
+
+  .contact-label {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--rust);
+    margin-bottom: 20px;
+  }
+
+  .contact-title {
+    font-family: 'IM Fell English', serif;
+    font-size: 32px;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+
+  .contact-desc {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 2;
+    margin-bottom: 36px;
+  }
+
+  /* ★ 인스타그램 주소 — href 부분을 바꾸세요 */
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rust);
+    padding-bottom: 4px;
+    transition: gap 0.3s;
+  }
+
+  .contact-link:hover { gap: 18px; }
+
+  /* ===== 푸터 ===== */
+  footer {
+    padding: 40px 48px 32px;
+    border-top: 0.5px solid #b8a99230;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer-logo {
+    font-family: 'IM Fell English', serif;
+    font-size: 20px;
+    color: var(--bg-mid);
+  }
+
+  .footer-sub {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--rust);
+    letter-spacing: 0.15em;
+    margin-top: 4px;
+  }
+
+  .footer-copy {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--dust);
+    letter-spacing: 0.1em;
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  /* ===== 모바일 대응 ===== */
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .nav-links { gap: 20px; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-image { min-height: 340px; }
+    .hero-text { padding: 48px 28px; }
+    .hero-title { font-size: 40px; }
+    .looks-grid { grid-template-columns: 1fr 1fr; }
+    .brand-story { grid-template-columns: 1fr; }
+    .story-image { min-height: 320px; }
+    .story-text { padding: 52px 28px; }
+    footer { flex-direction: column; gap: 20px; }
+    .footer-copy { text-align: left; }
+  }
+
+  @media (max-width: 480px) {
+    .looks-grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 34px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== 네비게이션 ===== -->
+<nav>
+  <div>
+    <!-- ★ 브랜드 이름 바꾸려면 여기 수정 -->
+    <div class="nav-logo">Sawa Flower</div>
+    <div class="nav-sub">沢の花 — flower of the marsh</div>
+  </div>
+  <ul class="nav-links">
+    <!-- ★ 메뉴 항목 바꾸려면 여기 수정 -->
+    <li><a href="#looks">룩</a></li>
+    <li><a href="#story">브랜드</a></li>
+    <li><a href="#items">아이템</a></li>
+    <li><a href="#contact">문의</a></li>
+  </ul>
+</nav>
+
+<!-- ===== 히어로 ===== -->
+<section class="hero">
+  <div class="hero-image">
+    <div class="hero-image-placeholder">
+      <!-- ★ 여기에 사진을 넣으려면:
+           1. 이 div를 지우고
+           2. .hero-image { background: url('사진이름.jpg') center/cover; } 로 CSS 수정 -->
+      <div class="placeholder-text">여기에 메인 사진이 들어와요</div>
+      <div class="placeholder-text" style="font-size:10px; opacity:0.3;">시골 논밭 / 낡은 집 / 버스정류장</div>
+    </div>
+  </div>
+
+  <div class="hero-text">
+    <div class="hero-kana">さわ · sawa · 沢</div>
+    <!-- ★ 메인 타이틀 -->
+    <div class="hero-title">Sawa<br>Flower</div>
+    <div class="hero-title-ko">습지에 피는 꽃</div>
+    <!-- ★ 메인 소개 문구 -->
+    <div class="hero-desc">
+      잘 보이지 않는 곳에서 피는 꽃처럼.<br>
+      시골 논밭 끝, 낡은 집 담벼락 아래,<br>
+      아무도 모르는 풀밭 사이에서<br>
+      조용히 존재하는 아름다움.<br><br>
+      사라질 것 같지만 여기 있는,<br>
+      힘없어 보이지만 뿌리가 깊은.
+    </div>
+    <a href="#looks" class="hero-cta">첫 번째 룩 보기 →</a>
+  </div>
+</section>
+
+<!-- ===== 룩 그리드 ===== -->
+<div class="section-divider" id="looks">— new looks —</div>
+
+<div class="looks-grid" id="looks-grid">
+  <!-- 룩 카드는 아래 JS에서 자동으로 생성됩니다 -->
+</div>
+
+<!-- ===== 브랜드 스토리 ===== -->
+<div class="brand-story" id="story">
+  <div class="story-image">
+    <!-- ★ 스토리 사진 넣으려면:
+         .story-image { background: url('story.jpg') center/cover; } 로 CSS 수정 -->
+    <div class="placeholder-text">스토리 사진</div>
+  </div>
+  <div class="story-text">
+    <div class="story-label">about sawa flower</div>
+    <!-- ★ 브랜드 스토리 제목과 본문 -->
+    <div class="story-heading">평범한 애들이<br>가진 특별한 감정</div>
+    <div class="story-body">
+      화려하지 않아도 괜찮아.<br>
+      유명하지 않아도 아름다울 수 있어.<br><br>
+      사와 플라워는 시골 어딘가에 사는<br>
+      소녀의 옷장에서 시작했어.<br>
+      논밭 사이를 걷고, 버스를 기다리고,<br>
+      창고 문을 열어두던 그 오후의 느낌.<br><br>
+      쇠약하고 힘없어 보이지만<br>
+      뿌리는 깊은 — 습지의 꽃처럼.
+    </div>
+  </div>
+</div>
+
+<!-- ===== 아이템 태그 ===== -->
+<div class="items-strip" id="items">
+  <div class="items-label">— what we carry —</div>
+  <div class="items-row" id="items-row">
+    <!-- 아이템 태그는 아래 JS에서 생성됩니다 -->
+  </div>
+</div>
+
+<!-- ===== 판매 정책 배너 ===== -->
+<div class="policy-banner">
+  <!-- ★ 정책 문구 바꾸려면 여기 수정 -->
+  <div class="policy-text">룩 단위로만 판매합니다 — 단품 개별 구매 불가 · 한정수량</div>
+</div>
+
+<!-- ===== 문의 ===== -->
+<div class="contact-section" id="contact">
+  <div class="contact-label">contact & order</div>
+  <div class="contact-title">구매 문의</div>
+  <!-- ★ 문의 안내 문구 -->
+  <div class="contact-desc">
+    룩 단위로만 판매해요.<br>
+    인스타그램 DM으로 문의해주세요.
+  </div>
+  <!-- ★ 인스타그램 주소 바꾸려면 href="" 안을 수정하세요 -->
+  <a href="https://instagram.com/sawaflower" class="contact-link" target="_blank">
+    instagram @sawaflower →
+  </a>
+</div>
+
+<!-- ===== 푸터 ===== -->
+<footer>
+  <div>
+    <div class="footer-logo">Sawa Flower</div>
+    <div class="footer-sub">沢の花 · 습지에 피는 꽃</div>
+  </div>
+  <div class="footer-copy">
+    <!-- ★ 저작권 문구 -->
+    © 2025 Sawa Flower<br>
+    룩 단위 판매 · 단품 없음
+  </div>
+</footer>
+
+<script>
+// ================================================================
+//  ★★★ 여기서 룩 정보를 수정하세요! ★★★
+//  name: 룩 이름
+//  ko: 한국어 부제목
+//  items: 포함된 아이템 (줄바꿈은 \n)
+//  price: 가격
+//  photo: 사진 파일명 (같은 폴더에 사진을 넣고 파일명 입력)
+//         사진 없으면 '' 로 두면 돼요
+// ================================================================
+const looks = [
+  {
+    num: '01',
+    name: 'Fog and Rice Field',
+    ko: '안개 낀 논밭',
+    items: '레이스 슬립 원피스\n루즈 모헤어 니트\n망사 스타킹 + 벨벳 초커',
+    price: '₩148,000',
+    photo: ''  // 예: 'look01.jpg'
+  },
+  {
+    num: '02',
+    name: 'Old Bus Stop',
+    ko: '낡은 버스정류장',
+    items: '빈티지 플로럴 블라우스\n와이드 린넨 슬랙스\n레이스 삭스 + 가죽 초커',
+    price: '₩136,000',
+    photo: ''
+  },
+  {
+    num: '03',
+    name: 'Overgrown Path',
+    ko: '우거진 풀밭 끝',
+    items: '플로럴 미디 슬립스커트\n크롭 가디건\n패턴 스타킹 + 리본 초커',
+    price: '₩124,000',
+    photo: ''
+  },
+  {
+    num: '04',
+    name: 'The Warehouse Door',
+    ko: '창고 문 앞',
+    items: '오버사이즈 빈티지 셔츠\n레이스 슬립 (레이어드)\n시스루 타이즈 + 벨벳 초커',
+    price: '₩158,000',
+    photo: ''
+  },
+  {
+    num: '05',
+    name: 'Window Light',
+    ko: '낡은 창가',
+    items: '크레이프 롱원피스\n레이스 소매 이너\n오버니삭스 + 체인 초커',
+    price: '₩142,000',
+    photo: ''
+  },
+  {
+    num: '06',
+    name: 'Coming Soon',
+    ko: '곧 공개',
+    items: '',
+    price: '',
+    photo: ''
+  }
+];
+
+// ================================================================
+//  ★★★ 여기서 아이템 태그를 수정하세요! ★★★
+// ================================================================
+const items = [
+  '레이스 슬립 원피스',
+  '루즈 니트',
+  '독특한 스타킹',
+  '초커',
+  '빈티지 믹스',
+  '레이스 삭스',
+  '오버사이즈 가디건',
+  '플로럴 블라우스',
+];
+
+// ── 룩 카드 자동 생성 (건드리지 마세요) ──
+const grid = document.getElementById('looks-grid');
+looks.forEach(look => {
+  const bgStyle = look.photo
+    ? `background: url('${look.photo}') center/cover no-repeat;`
+    : `background: var(--stone);`;
+
+  grid.innerHTML += `
+    <div class="look-card" style="${bgStyle}">
+      <div class="look-card-inner">
+        ${!look.photo ? `<div class="placeholder-text" style="opacity:0.4">look ${look.num}</div>` : ''}
+      </div>
+      <div class="look-tag">look ${look.num}</div>
+      <div class="look-overlay">
+        <div class="look-name">${look.name}</div>
+        ${look.ko ? `<div class="look-items">${look.ko}</div>` : ''}
+        ${look.items ? `<div class="look-items" style="font-size:10px;opacity:0.8">${look.items.replace(/\n/g,'<br>')}</div>` : ''}
+        ${look.price ? `<div class="look-price">${look.price}</div>` : ''}
+      </div>
+    </div>`;
+});
+
+// ── 아이템 태그 자동 생성 (건드리지 마세요) ──
+const row = document.getElementById('items-row');
+items.forEach(item => {
+  row.innerHTML += `<div class="item-pill">${item}</div>`;
+});
+</script>
+
+</body>
+</html>
