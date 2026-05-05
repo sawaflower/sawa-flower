@@ -1,0 +1,573 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Noto+Serif+KR:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  .sw-root {
+    background: #f0ebe3;
+    min-height: 100vh;
+    font-family: 'Cormorant Garamond', serif;
+    color: #2a2520;
+    overflow-x: hidden;
+  }
+
+  .grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.35;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 48px;
+    border-bottom: 0.5px solid #b8a99280;
+  }
+
+  .nav-logo {
+    font-family: 'IM Fell English', serif;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #3a2e26;
+  }
+
+  .nav-sub {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: #8a7a6e;
+    letter-spacing: 0.1em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: #5a4e44;
+    text-decoration: none;
+    letter-spacing: 0.12em;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: #2a2520; }
+
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 88vh;
+  }
+
+  .hero-image {
+    position: relative;
+    overflow: hidden;
+    background: #c9bfb0;
+  }
+
+  .hero-film-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, #d4c9bb55 0%, #a89070aa 60%, #6b5a4a88 100%);
+    mix-blend-mode: multiply;
+    z-index: 2;
+  }
+
+  .hero-img-placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(25%) saturate(0.7) brightness(0.88) contrast(1.05);
+  }
+
+  .hero-scene {
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 64px 56px 64px 64px;
+    background: #ede8df;
+  }
+
+  .hero-kana {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: #8a7a6e;
+    margin-bottom: 20px;
+  }
+
+  .hero-title {
+    font-family: 'IM Fell English', serif;
+    font-size: 52px;
+    font-weight: 400;
+    line-height: 1.1;
+    color: #2a2520;
+    margin-bottom: 8px;
+  }
+
+  .hero-title-ko {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    color: #7a6e64;
+    margin-bottom: 36px;
+  }
+
+  .hero-desc {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 2.1;
+    color: #5a4e44;
+    margin-bottom: 48px;
+    max-width: 320px;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: #3a2e26;
+    text-decoration: none;
+    border-bottom: 0.5px solid #8a7a6e;
+    padding-bottom: 4px;
+    width: fit-content;
+    transition: gap 0.3s;
+    cursor: pointer;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+
+  .hero-cta:hover { gap: 20px; }
+
+  .divider-text {
+    text-align: center;
+    padding: 48px 48px 24px;
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.35em;
+    color: #8a7a6e;
+    text-transform: uppercase;
+  }
+
+  .looks-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    padding: 0 0 2px;
+  }
+
+  .look-card {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    background: #c9bfb0;
+    aspect-ratio: 3/4;
+  }
+
+  .look-scene {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease;
+  }
+
+  .look-card:hover .look-scene {
+    transform: scale(1.03);
+  }
+
+  .look-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, #2a252099 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px;
+  }
+
+  .look-card:hover .look-overlay { opacity: 1; }
+
+  .look-name {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: #f0ebe3;
+    margin-bottom: 4px;
+  }
+
+  .look-price {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: #d4c9bb;
+  }
+
+  .look-tag {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #f0ebe3cc;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: #5a4e44;
+    padding: 4px 10px;
+    backdrop-filter: blur(4px);
+  }
+
+  .brand-story {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 2px 0;
+  }
+
+  .story-img {
+    background: #b8b0a4;
+    position: relative;
+    overflow: hidden;
+    min-height: 420px;
+  }
+
+  .story-text {
+    background: #e8e0d4;
+    padding: 72px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .story-label {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: #8a7a6e;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .story-heading {
+    font-family: 'IM Fell English', serif;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: #2a2520;
+    margin-bottom: 24px;
+  }
+
+  .story-body {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 2.2;
+    color: #5a4e44;
+  }
+
+  .items-strip {
+    padding: 48px;
+    background: #f0ebe3;
+  }
+
+  .items-label {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: #8a7a6e;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  .items-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+
+  .item-pill {
+    background: #e8e0d4;
+    border: 0.5px solid #b8a99280;
+    padding: 12px 16px;
+    text-align: center;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: #5a4e44;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .item-pill:hover {
+    background: #2a2520;
+    color: #f0ebe3;
+  }
+
+  .footer {
+    padding: 48px 48px 32px;
+    border-top: 0.5px solid #b8a99280;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer-logo {
+    font-family: 'IM Fell English', serif;
+    font-size: 22px;
+    color: #3a2e26;
+  }
+
+  .footer-sub {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: #8a7a6e;
+    letter-spacing: 0.15em;
+    margin-top: 4px;
+  }
+
+  .footer-copy {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 10px;
+    font-weight: 300;
+    color: #8a7a6e;
+    letter-spacing: 0.1em;
+  }
+
+  .film-scratch {
+    position: absolute;
+    top: 0; left: 20%; width: 1px; height: 100%;
+    background: linear-gradient(to bottom, transparent, #ffffff18 20%, #ffffff08 40%, transparent);
+    pointer-events: none;
+    z-index: 3;
+  }
+</style>
+
+<div class="sw-root">
+  <div class="grain"></div>
+
+  <nav>
+    <div>
+      <div class="nav-logo">Sawa Flower</div>
+      <div class="nav-sub">沢の花 — flower of the marsh</div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">룩</a></li>
+      <li><a href="#">아이템</a></li>
+      <li><a href="#">사와에 대해</a></li>
+      <li><a href="#">문의</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-image">
+      <div class="film-scratch"></div>
+      <div class="hero-film-overlay"></div>
+      <svg class="hero-scene" viewBox="0 0 540 760" xmlns="http://www.w3.org/2000/svg">
+        <rect width="540" height="760" fill="#c9c0b2"/>
+        <rect x="0" y="480" width="540" height="280" fill="#a09080" opacity="0.5"/>
+        <rect x="0" y="520" width="540" height="240" fill="#8a7e6e" opacity="0.4"/>
+        <rect x="60" y="380" width="2" height="380" fill="#6a6050" opacity="0.3"/>
+        <rect x="180" y="340" width="1.5" height="420" fill="#6a6050" opacity="0.25"/>
+        <rect x="320" y="360" width="2" height="400" fill="#6a6050" opacity="0.28"/>
+        <rect x="460" y="320" width="1.5" height="440" fill="#6a6050" opacity="0.2"/>
+        <ellipse cx="140" cy="340" rx="18" ry="28" fill="#b0a090" opacity="0.5"/>
+        <ellipse cx="155" cy="310" rx="12" ry="20" fill="#b8a898" opacity="0.4"/>
+        <ellipse cx="350" cy="320" rx="15" ry="24" fill="#b0a090" opacity="0.45"/>
+        <rect x="190" y="120" width="160" height="300" rx="2" fill="#d4c8b8" opacity="0.85"/>
+        <rect x="200" y="300" width="140" height="140" fill="#e0d4c4" opacity="0.9"/>
+        <rect x="220" y="420" width="100" height="10" fill="#c4b8a8" opacity="0.6"/>
+        <ellipse cx="270" cy="200" rx="38" ry="44" fill="#c8b8a8" opacity="0.9"/>
+        <rect x="232" y="240" width="76" height="180" rx="2" fill="#c4b4a4" opacity="0.85"/>
+        <rect x="248" y="418" width="44" height="200" rx="1" fill="#b8a898" opacity="0.7"/>
+        <rect x="248" y="418" width="14" height="200" fill="#c4b4a4" opacity="0.7"/>
+        <rect x="248" y="415" width="44" height="6" fill="#c8b8a8" opacity="0.8"/>
+        <ellipse cx="270" cy="305" rx="28" ry="8" fill="#d4c8b8" opacity="0.4"/>
+        <rect x="232" y="360" width="76" height="62" fill="#c8b8a8" opacity="0.35"/>
+        <rect x="200" y="300" width="140" height="2" fill="#b8a898" opacity="0.5"/>
+        <rect x="0" y="680" width="540" height="80" fill="#7a7060" opacity="0.3"/>
+        <text x="30" y="730" font-family="serif" font-style="italic" font-size="11" fill="#f0ebe3" opacity="0.35" letter-spacing="3">시골 버스정류장</text>
+        <rect x="0" y="0" width="540" height="760" fill="#8a6a4a" opacity="0.08"/>
+      </svg>
+    </div>
+
+    <div class="hero-text">
+      <div class="hero-kana">さわ · sawa · 沢</div>
+      <div class="hero-title">Sawa<br>Flower</div>
+      <div class="hero-title-ko">습지에 피는 꽃</div>
+      <div class="hero-desc">
+        잘 보이지 않는 곳에서 피는 꽃처럼.<br>
+        시골 논밭 끝, 낡은 집 담벼락 아래,<br>
+        아무도 모르는 풀밭 사이에서<br>
+        조용히 존재하는 아름다움.<br><br>
+        사라질 것 같지만 여기 있는,<br>
+        힘없어 보이지만 뿌리가 깊은.
+      </div>
+      <button class="hero-cta" onclick="sendPrompt('사와 플라워 첫 번째 룩 컬렉션을 보여줘')">
+        첫 번째 룩 보기 →
+      </button>
+    </div>
+  </div>
+
+  <div class="divider-text">— new looks —</div>
+
+  <div class="looks-grid">
+    <div class="look-card">
+      <svg class="look-scene" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+        <rect width="300" height="400" fill="#bfb8ac"/>
+        <rect x="0" y="200" width="300" height="200" fill="#a09880" opacity="0.5"/>
+        <rect x="90" y="60" width="120" height="280" rx="1" fill="#d8cfc4" opacity="0.9"/>
+        <ellipse cx="150" cy="90" rx="28" ry="32" fill="#c8bfb2" opacity="0.95"/>
+        <rect x="100" y="118" width="100" height="180" fill="#d0c8bc" opacity="0.85"/>
+        <rect x="100" y="240" width="100" height="60" fill="#c4bcb0" opacity="0.6"/>
+        <rect x="112" y="296" width="28" height="140" fill="#b8b0a4" opacity="0.7"/>
+        <rect x="160" y="296" width="28" height="140" fill="#b8b0a4" opacity="0.7"/>
+        <rect x="100" y="118" width="100" height="3" fill="#c0b8ac" opacity="0.5"/>
+        <rect x="0" y="340" width="300" height="60" fill="#706860" opacity="0.3"/>
+        <rect width="300" height="400" fill="#6a4a2a" opacity="0.06"/>
+      </svg>
+      <div class="look-tag">look 01</div>
+      <div class="look-overlay">
+        <div class="look-name">늪가의 소녀</div>
+        <div class="look-price">레이스 슬립 + 루즈 니트 + 망사 스타킹</div>
+      </div>
+    </div>
+
+    <div class="look-card">
+      <svg class="look-scene" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+        <rect width="300" height="400" fill="#b8b2a8"/>
+        <rect x="0" y="0" width="300" height="400" fill="#908070" opacity="0.25"/>
+        <rect x="20" y="0" width="260" height="250" fill="#9a9288" opacity="0.3"/>
+        <rect x="30" y="20" width="3" height="230" fill="#706860" opacity="0.4"/>
+        <rect x="267" y="20" width="3" height="230" fill="#706860" opacity="0.4"/>
+        <rect x="85" y="60" width="130" height="300" rx="1" fill="#d4ccc0" opacity="0.88"/>
+        <ellipse cx="150" cy="88" rx="30" ry="34" fill="#c4bcb0" opacity="0.95"/>
+        <rect x="96" y="120" width="108" height="200" fill="#cec6ba" opacity="0.85"/>
+        <rect x="96" y="120" width="108" height="80" fill="#d4ccc0" opacity="0.5"/>
+        <rect x="108" y="318" width="30" height="130" fill="#b0a89c" opacity="0.75"/>
+        <rect x="162" y="318" width="30" height="130" fill="#b0a89c" opacity="0.75"/>
+        <rect width="300" height="400" fill="#4a3a2a" opacity="0.07"/>
+      </svg>
+      <div class="look-tag">look 02</div>
+      <div class="look-overlay">
+        <div class="look-name">폐창고의 오후</div>
+        <div class="look-price">빈티지 블라우스 + 초커 + 레이스 삭스</div>
+      </div>
+    </div>
+
+    <div class="look-card">
+      <svg class="look-scene" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+        <rect width="300" height="400" fill="#c4bcb0"/>
+        <rect x="0" y="280" width="300" height="120" fill="#8a8070" opacity="0.4"/>
+        <ellipse cx="80" cy="310" rx="25" ry="15" fill="#9a9285" opacity="0.5"/>
+        <ellipse cx="220" cy="295" rx="30" ry="18" fill="#9a9285" opacity="0.4"/>
+        <ellipse cx="150" cy="320" rx="20" ry="12" fill="#9a9285" opacity="0.45"/>
+        <rect x="88" y="55" width="124" height="290" rx="1" fill="#dcd4c8" opacity="0.9"/>
+        <ellipse cx="150" cy="82" rx="32" ry="36" fill="#ccc4b8" opacity="0.95"/>
+        <rect x="100" y="116" width="100" height="190" fill="#d8d0c4" opacity="0.85"/>
+        <rect x="100" y="116" width="100" height="100" fill="#e0d8cc" opacity="0.5"/>
+        <rect x="100" y="216" width="100" height="90" rx="0" fill="#ccc4b8" opacity="0.6"/>
+        <rect x="112" y="304" width="30" height="140" fill="#b8b0a4" opacity="0.7"/>
+        <rect x="158" y="304" width="30" height="140" fill="#b8b0a4" opacity="0.7"/>
+        <rect width="300" height="400" fill="#5a4a3a" opacity="0.05"/>
+      </svg>
+      <div class="look-tag">look 03</div>
+      <div class="look-overlay">
+        <div class="look-name">풀밭의 끝에서</div>
+        <div class="look-price">플로럴 슬립 + 긴 가디건 + 얇은 초커</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brand-story">
+    <div class="story-img">
+      <div class="film-scratch"></div>
+      <svg width="100%" height="100%" viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="400" height="420" fill="#b0a898"/>
+        <rect x="0" y="260" width="400" height="160" fill="#8a8070" opacity="0.5"/>
+        <rect x="0" y="300" width="400" height="120" fill="#706858" opacity="0.4"/>
+        <ellipse cx="100" cy="290" rx="40" ry="25" fill="#9a9285" opacity="0.5"/>
+        <rect x="40" y="180" width="3" height="240" fill="#604e3a" opacity="0.35"/>
+        <rect x="100" y="160" width="2" height="260" fill="#604e3a" opacity="0.3"/>
+        <rect x="200" y="140" width="2.5" height="280" fill="#604e3a" opacity="0.32"/>
+        <rect x="320" y="170" width="2" height="250" fill="#604e3a" opacity="0.28"/>
+        <rect x="370" y="150" width="1.5" height="270" fill="#604e3a" opacity="0.25"/>
+        <ellipse cx="50" cy="155" rx="16" ry="22" fill="#a09080" opacity="0.5"/>
+        <ellipse cx="60" cy="133" rx="10" ry="14" fill="#a89888" opacity="0.45"/>
+        <ellipse cx="220" cy="120" rx="14" ry="20" fill="#a09080" opacity="0.45"/>
+        <ellipse cx="233" cy="105" rx="9" ry="13" fill="#a89888" opacity="0.4"/>
+        <ellipse cx="380" cy="140" rx="12" ry="18" fill="#a09080" opacity="0.4"/>
+        <rect x="130" y="80" width="140" height="260" rx="1" fill="#d4c8b8" opacity="0.85"/>
+        <ellipse cx="200" cy="110" rx="34" ry="38" fill="#c8bcac" opacity="0.92"/>
+        <rect x="142" y="146" width="116" height="200" fill="#d0c4b4" opacity="0.88"/>
+        <rect x="158" y="344" width="32" height="130" fill="#b8ac9c" opacity="0.7"/>
+        <rect x="210" y="344" width="32" height="130" fill="#b8ac9c" opacity="0.7"/>
+        <rect width="400" height="420" fill="#5a4030" opacity="0.08"/>
+        <text x="20" y="400" font-family="serif" font-style="italic" font-size="10" fill="#f0ebe3" opacity="0.3" letter-spacing="2">낡은 집 앞에서</text>
+      </svg>
+    </div>
+    <div class="story-text">
+      <div class="story-label">about sawa flower</div>
+      <div class="story-heading">평범한 애들이<br>가진 특별한 감정</div>
+      <div class="story-body">
+        바랜 필름 속에 박제된 소녀의 옷장.<br>
+        낡은 버스 정류장의 찬 공기,<br><br>
+        먼지 쌓인 창고의 냄새,<br>
+        녹슨 문 틈 사이로 부서지던 오후의 햇살.<br>
+        논밭 사이를 걷고, 버스를 기다리며<br>
+        아무도 모르게 흘러가던 시간들.<br><br>
+        쇠약하고 힘없어 보이지만<br>
+        뿌리는 깊은 — 습지의 꽃처럼.
+      </div>
+    </div>
+  </div>
+
+  <div class="items-strip">
+    <div class="items-label">— what we carry —</div>
+    <div class="items-row">
+      <div class="item-pill">레이스 슬립 원피스</div>
+      <div class="item-pill">루즈 니트</div>
+      <div class="item-pill">독특한 스타킹</div>
+      <div class="item-pill">초커</div>
+      <div class="item-pill">빈티지 믹스</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>
+      <div class="footer-logo">Sawa Flower</div>
+      <div class="footer-sub">沢の花 · 습지에 피는 꽃</div>
+    </div>
+    <div class="footer-copy">© 2026 Sawa Flower</div>
+  </div>
+
+</div>
