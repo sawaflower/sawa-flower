@@ -219,6 +219,8 @@ footer{background:var(--bg-dark);padding:52px 48px 80px;display:grid;grid-templa
   <div class="intro-logo">Sawa<br>Flower</div>
   <div class="intro-sub">沢の花 · flower of the marsh</div>
   <div class="intro-music">
+    <span>♫ 太陽さん — Ichiko Aoba</span>
+    음악과 함께 입장합니다
   </div>
   <button class="intro-enter" id="intro-btn">enter ♪</button>
 </div>
@@ -295,6 +297,9 @@ footer{background:var(--bg-dark);padding:52px 48px 80px;display:grid;grid-templa
 
 <!-- STATEMENT -->
 <div class="statement fade-in">
+  <div class="statement-quote">"평범한 애들이 가진<br>특별한 감정"</div>
+  <div class="statement-line"></div>
+  <div class="statement-attr">Sawa Flower · 沢の花</div>
 </div>
 
 <!-- STORY -->
@@ -308,15 +313,35 @@ footer{background:var(--bg-dark);padding:52px 48px 80px;display:grid;grid-templa
     <div class="story-label-sm">about sawa flower</div>
     <div class="story-heading">아무도 모르게<br>흘러가던<br>그 오후</div>
     <div class="story-body">화려하지 않아도 괜찮아.<br>유명하지 않아도 아름다울 수 있어.<br><br>사와 플라워는 시골 어딘가에 사는<br>소녀의 옷장에서 시작했어.<br>논밭 사이를 걷고, 버스를 기다리고,<br>창고 문을 열어두던 그 오후의 느낌.<br><br>쇠약하고 힘없어 보이지만<br>뿌리는 깊은 — 습지의 꽃처럼.</div>
-    <div class="story-ref">
+    <div class="story-ref">ref. 영화 &lt;God Help the Girl&gt; · 자연 · 일본 인디 감성</div>
   </div>
 </section>
+
+<!-- CONCEPT -->
+<section class="concept-section fade-in">
+  <div class="section-label" style="padding-top:0">brand concept</div>
+  <div class="section-title">키워드</div>
+  <div class="section-line"></div>
+  <div class="concept-grid" id="concept-grid"></div>
+</section>
+
+<!-- ITEMS -->
+<section class="items-section" id="items">
+  <div class="section-label">what we carry</div>
+  <div class="section-title">아이템</div>
+  <div class="items-row" id="items-row"></div>
+</section>
+
+<!-- POLICY -->
+<div class="policy-banner fade-in">
+  <div class="policy-text">룩 단위로만 판매합니다 — 단품 개별 구매 불가 · 한정수량</div>
+</div>
 
 <!-- CONTACT -->
 <section class="contact-section fade-in" id="contact">
   <div class="section-label" style="padding-top:0">contact & order</div>
   <div class="contact-title">구매 문의</div>
-  <div class="contact-body">인스타그램 DM으로 문의해주세요.</div>
+  <div class="contact-body">룩 단위로만 판매해요.<br>인스타그램 DM으로 문의해주세요.</div>
   <div class="contact-links">
     <a href="https://instagram.com/sawaflower_kr" class="contact-link" target="_blank">instagram @sawaflower_kr →</a>
   </div>
@@ -354,6 +379,20 @@ const looks = [
   { num:'06', name:'곧 공개',        eng:'Coming Soon', items:'', price:'', photo:'' },
 ];
 
+const items = ['초커','독특한 스타킹','빈티지 믹스','레이스 슬립 원피스','루즈 니트','레이스 삭스','오버사이즈 가디건','플로럴 블라우스'];
+
+const marqueeWords = ['사와 플라워','沢の花','모리걸','락시크','일본 인디','시골 논밭','낡은 집','버스정류장','습지에 피는 꽃','사라질 것 같은 아름다움','병약함 + 강인함'];
+
+const concepts = [
+  { ko:'시골 · 자연',     en:'rural & nature',   desc:'논밭, 풀밭, 낡은 집, 버스정류장' },
+  { ko:'쇠약함 · 힘없음', en:'fragile beauty',   desc:'병약하지만 뿌리 깊은' },
+  { ko:'폐허 · 빈티지',   en:'ruin & vintage',   desc:'오래된 것의 아름다움' },
+  { ko:'일본 인디 감성',  en:'japanese indie',   desc:'God Help the Girl 무드' },
+  { ko:'사라질 것 같은',  en:'ephemeral',        desc:'희미하게 존재하는 소녀' },
+  { ko:'평범 속 특별함',  en:'ordinary special', desc:'평범한 사람들의 깊은 감정' },
+];
+
+// 룩 카드 생성
 const grid = document.getElementById('looks-grid');
 looks.forEach(l => {
   if (l.num === '06') {
